@@ -23,22 +23,33 @@ var init = function (window) {
 var circle; // variable to hold a single circle when creating circles / iterating
 var circles = []; // variable to store all circles in one Array
 
+// TODO: 2
 // Code to draw a circle
-circle = draw.randomCircleInArea(canvas, true, true, "#999", 2);
-physikz.addRandomVelocity(circle, canvas);
-view.addChild(circle);
-circles.push(circle);
-       
+
+function drawCircle() { 
+    circle = draw.randomCircleInArea(canvas, true, true, "#999", 2);
+    physikz.addRandomVelocity(circle, canvas,4, 4);
+    view.addChild(circle);
+    circles.push(circle);
+}
         
 
-        // TODO 3 / 7 : for (var loopsCompleted = 0; loopsCompleted < 10; loopsCompleted++) {
-  // do something
-}var loopsCompleted = 0;
-while (loopsCompleted < 10) {
-  // do something
-  loopsCompleted++;
-}
-/* nameOfFunction(); */ 
+// TODO 3 / 7 : Call the drawCircle() function 
+for (var loopsCompleted = 0; loopsCompleted < 100; loopsCompleted++) {
+    drawCircle(); 
+  }
+  for (var loopsCompleted = 0; loopsCompleted < 10; loopsCompleted++) {
+    drawCircle();
+  }
+  for (var loopsCompleted = 0; loopsCompleted < 10; loopsCompleted++) {
+    drawCircle();
+  }
+  for (var loopsCompleted = 0; loopsCompleted < 10; loopsCompleted++) {
+    drawCircle();
+  }
+  for (var loopsCompleted = 0; loopsCompleted < 10; loopsCompleted++) {
+    drawCircle();
+  }
 
 
         ////////////////////////////////////////////////////////////
@@ -52,28 +63,24 @@ while (loopsCompleted < 10) {
         */
         function update() {
             // TODO 4 : Update the circle's position //
-          
-            physikz.updatePosition(/* Your Bracket Notation HERE */);
-            physikz.updatePosition(/* Your Bracket Notation HERE */);
-            physikz.updatePosition(/* Your Bracket Notation HERE */);
-            physikz.updatePosition(/* Your Bracket Notation HERE */);
-            physikz.updatePosition(/* Your Bracket Notation HERE */);
-          }
+            for (var i = 0; i < circles.length; i++) {
+                physikz.updatePosition(circles[i]);
+                game.checkCirclePosition(circles[i]);
+              }
 
-            
+              
             // TODO 5 : Call game.checkCirclePosition() on your circles.
-
-game.checkCirclePosition(/* Your Bracket Notation HERE */);
-game.checkCirclePosition(/* Your Bracket Notation HERE */);
-game.checkCirclePosition(/* Your Bracket Notation HERE */);
-game.checkCirclePosition(/* Your Bracket Notation HERE */);
-game.checkCirclePosition(/* Your Bracket Notation HERE */);
-           
+            game.checkCirclePosition(circles[0])
+            game.checkCirclePosition(circles[1]);
+            game.checkCirclePosition(circles[2]);
+            game.checkCirclePosition(circles[3]);
+            game.checkCirclePosition(circles[4]);
+        }
 
             // TODO 9 : Iterate over the array
-           
+
             
-        }
+        
     
         /* 
         This Function should check the position of a circle that is passed to the 
@@ -85,11 +92,25 @@ game.checkCirclePosition(/* Your Bracket Notation HERE */);
             // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
             if ( circle.x > canvas.width ) {
                 circle.x = 0;
+                
             }
             
             // TODO 6 : YOUR CODE STARTS HERE //////////////////////
-            
+            if ( circle.x < 0 ) {
+                circle.x = canvas.width;
+                
+            }
 
+            if ( circle.y > canvas.height ) {
+                circle.y = 0;
+                
+            }
+
+            if ( circle.y < 0 ) {
+                circle.y = canvas.height;
+                
+            }
+            
 
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
         }
