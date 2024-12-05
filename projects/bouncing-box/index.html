@@ -7,17 +7,17 @@
 	<script src="jquery.min.js"></script>
 	<style>
 		.box {
-			width: 300px;
-			height: 200px;
+			width: 70px;
+			height: 70px;
 			background-color: rgb(245, 198, 234);
 			font-size: 300%;
 			text-align: center;
 			user-select: none;
 			display: block;
 			position: absolute;
-			top: 400px;
+			top: 100px;
 			/* Change me! */
-			left: 400px;
+			left: 0px;
 		}
 
 		.board {
@@ -33,10 +33,7 @@
 	<div class="box">?</div>
 
 	<script>
-		(function moveBoxTo (newPositionX) {
-			box.css("left", newPositionX); 
-		
-		
+(function () {
 			'use strict'
 			/* global jQuery */
 
@@ -72,17 +69,28 @@
 
 /* Your Variable Declaration HERE */
 
+		var positionX = 0;
+		var points = 0
+		var speed = 10
+
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
 			turn it around! 
 			*/
-			function update() { 
-				moveBoxTo(100);
-				positionX = positionX + 10;
+			function update() { 	
+
+				if (positionX > boardWidth) {
+					speed *= -1
+				}
+
+				if (positionX < 0) {
+					speed *= -1
+				}
+
+				positionX = positionX + speed;
 				moveBoxTo(positionX);
-				var points = 0
-				var speed = 10
+
 			}
 
 		
@@ -96,8 +104,18 @@
 				positionX = 0;
 
 				// your code to increase the points variable by 1
-
-				changeBoxText(1);
+				changeBoxText(points++);
+				changeBoxText(points);
+				
+				if (speed > 0) {
+					speed += 3;	
+				} else if (speed < 0) {
+					speed -= 3;
+				}
+				
+				
+				
+				
 			}
 
 
